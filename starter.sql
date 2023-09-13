@@ -1,46 +1,35 @@
--- CREATE SCHEMA university
+CREATE TABLE university.Enrollments(
+	enrollment_id SERIAL PRIMARY KEY,
+	student_id INT,
+	FOREIGN KEY (student_id) REFERENCES university.Students(students_id),
+	courses_id INT,
+	FOREIGN KEY (courses_id) REFERENCES university.Courses(courses_id)
+)
 
--- CREATE TABLE university.Students(
--- 	Students_id SERIAL PRIMARY KEY,
--- 	first_name TEXT NOT NULL,
--- 	last_name TEXT NOT NULL,
--- 	date_of_birth DATE,
--- 	email TEXT UNIQUE
--- )
+INSERT INTO university.enrollments (student_id, courses_id)
+VALUES(1,1),(2,1),(3,2),(4,3),(1,3)
 
--- INSERT INTO university.Students(first_name, last_name, date_of_birth, email)
--- VALUES 
--- 	('John', 'Doe', '1990-01-15','john.doe@example.com'),
--- 	('Jane', 'Smith', '1992-05-20','jane.smith@example.com'),
--- 	('Michael', 'Johnson', '1991-09-10','michael.johnso@example.com'),
--- 	('Emily', 'Davis', '1993-03-25','emily.davis@example.com')
 
--- CREATE TABLE university.Teachers(
--- 	teachers_id SERIAL PRIMARY KEY,
--- 	first_name TEXT NOT NULL,
--- 	last_name TEXT NOT NULL,
--- 	date_of_birth DATE,
--- 	email TEXT UNIQUE,
--- 	department TEXT,
--- 	hire_date DATE	
--- )
+CREATE TABLE university.TeacherCourse (
+    TeacherCourse_id SERIAL PRIMARY KEY,
+    teachers_id INT ,
+    FOREIGN KEY (teachers_id) REFERENCES university.teachers (teachers_id),
+    courses_id INT ,
+    FOREIGN KEY (courses_id) REFERENCES university.courses (courses_id)
+    ) 
 
--- INSERT INTO university.Teachers(first_name, last_name, date_of_birth, email, department, hire_date)
--- VALUES 
--- 	('Professor', 'Anderson', '1975-04-08','prof.anderson@example.com', 'Computer Science', '2010-08-15'),
--- 	('Dr. Sarah', 'Wilson', '1980-12-20','sarah.wilson@example.com', 'Mathematics', '2015-05-02'),
--- 	('Mr. James', 'Brown', '1978-06-14','james.brown@example.com', 'History', '2009-11-11')
+INSERT INTO university.TeacherCourse (teachers_id, courses_id)
+VALUES(1,1),(2,2),(3,3)
 
--- CREATE TABLE university.Courses(
--- 	courses_id SERIAL PRIMARY KEY,
--- 	cours_name TEXT NOT NULL,
--- 	department TEXT,
--- 	credits INT	
--- )
 
--- INSERT INTO university.Courses(cours_name, department, credits)
--- VALUES
--- 	('Introduction to Programming', 'Computer Science', 3),
--- 	('Calculus I', 'Mathematics', 4),
--- 	('World History', 'History', 3)
+CREATE TABLE university.Grades (
+    Grade_id SERIAL PRIMARY KEY,
+    courses_id INT ,
+    FOREIGN KEY (courses_id) REFERENCES university.courses (courses_id),
+    student_id INT,
+	FOREIGN KEY (student_id) REFERENCES university.Students(students_id),
+    Grade INT
+)
 
+INSERT INTO grades (courses_id, student_id, grade)
+VALUES(1,1,100),(1,2,99),(2,3,98),(3,4,97),(3,1,96)

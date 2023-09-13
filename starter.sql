@@ -1,35 +1,23 @@
-CREATE TABLE university.Enrollments(
-	enrollment_id SERIAL PRIMARY KEY,
-	student_id INT,
-	FOREIGN KEY (student_id) REFERENCES university.Students(students_id),
-	courses_id INT,
-	FOREIGN KEY (courses_id) REFERENCES university.Courses(courses_id)
-)
-
-INSERT INTO university.enrollments (student_id, courses_id)
-VALUES(1,1),(2,1),(3,2),(4,3),(1,3)
-
-
-CREATE TABLE university.TeacherCourse (
-    TeacherCourse_id SERIAL PRIMARY KEY,
-    teachers_id INT ,
-    FOREIGN KEY (teachers_id) REFERENCES university.teachers (teachers_id),
-    courses_id INT ,
-    FOREIGN KEY (courses_id) REFERENCES university.courses (courses_id)
-    ) 
-
-INSERT INTO university.TeacherCourse (teachers_id, courses_id)
-VALUES(1,1),(2,2),(3,3)
-
-
-CREATE TABLE university.Grades (
-    Grade_id SERIAL PRIMARY KEY,
-    courses_id INT ,
-    FOREIGN KEY (courses_id) REFERENCES university.courses (courses_id),
+CREATE TABLE StudyGroup(
+    StudyGroup_id SERIAL PRIMARY KEY,
+    name_Group TEXT,
     student_id INT,
-	FOREIGN KEY (student_id) REFERENCES university.Students(students_id),
-    Grade INT
-)
+	FOREIGN KEY (student_id) REFERENCES university.Students(students_id)
+    )
 
-INSERT INTO grades (courses_id, student_id, grade)
-VALUES(1,1,100),(1,2,99),(2,3,98),(3,4,97),(3,1,96)
+INSERT INTO StudyGroup (name_group, student_id)
+VALUES('group 1',1), ('group 2',2)
+
+SELECT * FROM courses
+
+SELECT * FROM enrollments
+
+SELECT * FROM grades
+
+SELECT * FROM students
+
+SELECT * FROM StudyGroup
+
+SELECT * FROM TeacherCourse
+
+SELECT * FROM teachers
